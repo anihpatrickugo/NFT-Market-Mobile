@@ -16,19 +16,13 @@ export default function DrawerLayout() {
         headerShown: false,
       }}>
       <Drawer.Screen
-        name="index"
+        name="(nft-stack)"
         options={{
-          title: 'Home',
+          title: 'Market Place',
           
         }}
       />
-      <Drawer.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-        
-        }}
-      />
+  
     </Drawer>
   );
 }

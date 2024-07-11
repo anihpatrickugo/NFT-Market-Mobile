@@ -1,17 +1,17 @@
 import React, { FC } from 'react'
-import { ScrollView, ScrollViewProps, StyleSheet } from 'react-native'
+import { SafeAreaView, ViewProps, StyleSheet } from 'react-native'
 
 
-export type ContainnerViewProps = ScrollViewProps & {
+export type ContainnerViewProps = ViewProps & {
     children: React.ReactNode
 
   };
 
 const ContainnerView: FC<ContainnerViewProps> = ({children}) => {
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <SafeAreaView style={[styles.container, ]}>
       {children}
-    </ScrollView>
+    </SafeAreaView>
   )
 }
 
@@ -20,6 +20,8 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         padding: 20,
+        paddingTop: 35,
+        backgroundColor: "F5F5F5"
         
     },
 })

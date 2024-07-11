@@ -9,7 +9,7 @@ export default function TabTwoScreen() {
   return (
     <UI.ContainnerView>
       <UI.ThemedView style={styles.titleContainer}>
-        <UI.ThemedText type="title">Explore</UI.ThemedText>
+        <UI.ThemedText size="lg">My assets</UI.ThemedText>
       </UI.ThemedView>
       <UI.ThemedText>This app includes example code to help you get started.</UI.ThemedText>
     </UI.ContainnerView>

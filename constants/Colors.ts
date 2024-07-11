@@ -10,6 +10,7 @@ export const black1 = '#1B1B1B';
 export const black2 = '#252525';
 export const black3 = '#272727';
 export const grey = '#343541';
+export const lightGrey = '#959595';
 
 export const Colors = {
   light: {
