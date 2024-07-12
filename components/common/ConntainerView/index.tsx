@@ -1,17 +1,22 @@
+import { useThemeColor } from '@/hooks/useThemeColor';
 import React, { FC } from 'react'
-import { SafeAreaView, ViewProps, StyleSheet } from 'react-native'
+import { View, ViewProps, StyleSheet } from 'react-native'
+
 
 
 export type ContainnerViewProps = ViewProps & {
-    children: React.ReactNode
+    children: React.ReactNode,
+    
 
   };
 
 const ContainnerView: FC<ContainnerViewProps> = ({children}) => {
+  
+
   return (
-    <SafeAreaView style={[styles.container, ]}>
+    <View style={[styles.container ]}>
       {children}
-    </SafeAreaView>
+    </View>
   )
 }
 
@@ -21,9 +26,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 20,
         paddingTop: 35,
-        backgroundColor: "F5F5F5"
         
-    },
+    }
 })
 
 export {ContainnerView};

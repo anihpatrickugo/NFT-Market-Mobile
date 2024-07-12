@@ -4,15 +4,16 @@ import * as UI from '@/components/common/index'
 import Ethereum from '@/assets/icons/Ethereum'
 import { black0, grey } from '@/constants/Colors'
 import { router } from 'expo-router'
+import Animated from 'react-native-reanimated'
 
 
-const NFTCard = () => {
+const NFTCard = ({item}: {item: any}) => {
   return (
-    <Pressable onPress={()=>router.navigate({pathname: "details/hi"})}>
+    <Pressable onPress={()=>router.navigate({pathname: "details/[id]", params: {id: item.index}})}>
     
     <UI.ThemedView lightColor='white' darkColor={black0} style={styles.containner}>
       <View style={{width: "100%", height: "60%"}}>
-        <Image style={{width: "100%", height: "100%", borderRadius: 20 }} resizeMode='stretch' source={require('@/assets/images/nft.jpeg')}/>
+        <Animated.Image sharedTransitionTag={`image-${item.index}`} style={{width: "100%", height: "100%", borderRadius: 20 }} resizeMode='cover' source={require('@/assets/images/nft.jpeg')}/>
       </View>
 
       <View style={{width: "100%", margin: 16}}>

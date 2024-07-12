@@ -20,6 +20,10 @@ import { Ionicons } from '@expo/vector-icons';
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { white, black, grey, black1} from "@/constants/Colors";
 
+import { useSelector, useDispatch } from 'react-redux'
+import { toggleTheme } from "@/redux/slices/themeSlice";
+import { RootState } from "@/redux/store";
+
 
   type Props = {
     state: any,
@@ -30,6 +34,9 @@ import { white, black, grey, black1} from "@/constants/Colors";
 
   
   const CustomDrawer: FC<Props> = (props) => {
+
+    const theme = useSelector((state: RootState) => state.theme.value)
+    const dispatch = useDispatch()
 
     const textColor = useThemeColor({ light: black, dark: grey}, 'text');
     const iconColor = useThemeColor({ light: black, dark: white}, 'text');
@@ -66,6 +73,8 @@ import { white, black, grey, black1} from "@/constants/Colors";
               trackColor={{ false: "#767577", true: "#81b0ff" }}
               thumbColor="#f4f3f4"
               style={{ transform: [{ scaleX: 0.9 }, { scaleY: 0.9 }] }}
+              onChange={()=>{dispatch(toggleTheme())}}
+              value={theme === 'dark' ? true : false}
             />
             <Text
               style={{

@@ -3,6 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import * as UI from '@/components/common/index';
 import { FC } from 'react';
 import NFTList from '@/components/main/NFTList';
+import { black, white0 } from '@/constants/Colors';
 
 
 type HomeScreenProps = {
@@ -12,7 +13,7 @@ const HomeScreen: FC<HomeScreenProps> = () => {
   const navigation = useNavigation();
 
   return (
-    <UI.ContainnerView>
+    <UI.ThemedView lightColor={white0} darkColor={black} style={styles.container}>
       <UI.ThemedView lightColor='transparent' darkColor='transparent' style={styles.titleContainer}>
           
         <UI.DrawerIcon navigation={navigation}/>
@@ -24,13 +25,20 @@ const HomeScreen: FC<HomeScreenProps> = () => {
        <NFTList />
 
 
-    </UI.ContainnerView>
+    </UI.ThemedView>
   );
 }
 
 export default HomeScreen
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    padding: 20,
+    paddingTop: 35,
+    
+},
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',

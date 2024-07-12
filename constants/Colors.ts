@@ -4,6 +4,7 @@
  */
 
 export const white = '#FFFFFF';
+export const white0 = '#FAFAFA';
 export const black = '#000000';
 export const black0 = '#151515';
 export const black1 = '#1B1B1B';
