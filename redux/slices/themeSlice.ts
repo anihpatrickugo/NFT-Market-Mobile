@@ -1,13 +1,16 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice} from '@reduxjs/toolkit'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { PayloadAction } from '@reduxjs/toolkit'
 
-export interface CounterState {
-  value: string
+export type ThemeStateProps = {
+  value: string | void;
 }
 
-const initialState: CounterState = {
+
+const initialState: ThemeStateProps = {
   value: 'light',
 }
+
 
 export const themeSlice = createSlice({
   name: 'theme',
@@ -21,14 +24,25 @@ export const themeSlice = createSlice({
        if (state.value == "light") {
          state.value = "dark"
        } else {
-            state.value = "light"
+         state.value = "light"
        }
     },
 
+    setTheme: (state, action) => {
+      state.value = action.payload
+    },
+
+  },
+  extraReducers: (builder) => {
+    // Add reducers for additional action types here, and handle loading state as needed
+    // builder.addCase(themeThoggle.fulfilled, (state, action) => {
+    //   // Add user to the state array
+    //   state.value = action.payload
+    // })
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { toggleTheme } = themeSlice.actions
+export const { toggleTheme, setTheme } = themeSlice.actions
 
 export default themeSlice.reducer

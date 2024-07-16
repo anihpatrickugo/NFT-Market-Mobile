@@ -46,7 +46,7 @@ export default function TabTwoScreen() {
 
             {/* current bid */}
             <Animated.View  entering={FadeIn.duration(500).delay(800)} style={{width: "100%",}}>
-              <UI.ThemedText lightColor={lightGrey}  darkColor={black2}  bold size='sm' style={{marginVertical: 12}}>Current Bid</UI.ThemedText>
+              <UI.ThemedText lightColor={lightGrey}  darkColor={black2}  bold size='sm' style={{marginVertical: 12}}>Current Price</UI.ThemedText>
 
               <UI.ThemedView lightColor={lightGrey} darkColor={black1} style={styles.bid}>
 
@@ -67,7 +67,7 @@ export default function TabTwoScreen() {
         </ScrollView>
 
         <Animated.View  entering={BounceIn.duration(500).delay(500)} style={styles.button}>
-           <UI.Button text='Buy Now'/>
+           <UI.Button text='List Now!' onPress={()=> router.navigate("new-listing")}/>
         </Animated.View>
       </UI.ThemedView>
     

@@ -7,9 +7,9 @@ import { router } from 'expo-router'
 import Animated from 'react-native-reanimated'
 
 
-const NFTCard = ({item}: {item: any}) => {
+const ListingCard = ({item}: {item: any}) => {
   return (
-    <Pressable onPress={()=>router.navigate({pathname: "(nft-stack)/details/[id]", params: {id: item.index}})}>
+    <Pressable>
     
     <UI.ThemedView lightColor='white' darkColor={black0} style={styles.containner}>
       <View style={{width: "100%", height: "60%"}}>
@@ -22,20 +22,16 @@ const NFTCard = ({item}: {item: any}) => {
          {/* other details */}
          <View style={{width: "90%", flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 8}}>
 
-            <View style={{flexDirection: "row", gap: 4, alignItems: "center"}}>
-                <Image style={{width: 35, height: 35, borderRadius: 20}} source={require('@/assets/images/profile.png')}/>
-                <View>
-                    <UI.ThemedText size='xs' lightColor={grey} darkColor={grey}>Creator</UI.ThemedText>
-                    <UI.ThemedText size='sm' bold>@Zomax</UI.ThemedText>
-                </View>
-            </View>
-
-            <View style={{flexDirection: "row", gap: 4, alignItems: "center"}}>
+          <View style={{flexDirection: "row", gap: 4, alignItems: "center"}}>
                 <Ethereum width={35} height={40}/>
                 <View>
                     <UI.ThemedText size='xs' lightColor={grey} darkColor={grey}>Price:</UI.ThemedText>
                     <UI.ThemedText size='sm' bold>0.333 ETH</UI.ThemedText>
                 </View>
+            </View>
+
+            <View style={{flexDirection: "row", gap: 4, alignItems: "center", width: 140, marginVertical: -10}}>
+                <UI.Button text='Cancel Listing'/>
             </View>
 
          </View>
@@ -56,4 +52,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default NFTCard
+export default ListingCard

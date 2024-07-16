@@ -7,9 +7,9 @@ import { router } from 'expo-router'
 import Animated from 'react-native-reanimated'
 
 
-const NFTCard = ({item}: {item: any}) => {
+const MyAssetCard = ({item}: {item: any}) => {
   return (
-    <Pressable onPress={()=>router.navigate({pathname: "(nft-stack)/details/[id]", params: {id: item.index}})}>
+    <Pressable onPress={()=>router.navigate({pathname: "(my-assets-stack)/details/[id]", params: {id: item.index}})}>
     
     <UI.ThemedView lightColor='white' darkColor={black0} style={styles.containner}>
       <View style={{width: "100%", height: "60%"}}>
@@ -30,12 +30,8 @@ const NFTCard = ({item}: {item: any}) => {
                 </View>
             </View>
 
-            <View style={{flexDirection: "row", gap: 4, alignItems: "center"}}>
-                <Ethereum width={35} height={40}/>
-                <View>
-                    <UI.ThemedText size='xs' lightColor={grey} darkColor={grey}>Price:</UI.ThemedText>
-                    <UI.ThemedText size='sm' bold>0.333 ETH</UI.ThemedText>
-                </View>
+            <View style={{flexDirection: "row", gap: 4, alignItems: "center", width: 100, marginVertical: -10}}>
+                <UI.Button text='List Now' onPress={()=> router.navigate("new-listing")}/>
             </View>
 
          </View>
@@ -56,4 +52,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default NFTCard
+export default MyAssetCard

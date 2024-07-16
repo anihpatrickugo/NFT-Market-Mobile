@@ -8,7 +8,8 @@ import {
     StyleSheet,
     StatusBar,
     Switch,
-    useColorScheme
+    useColorScheme,
+    Pressable
   } from "react-native";
   import {
     DrawerContentScrollView,
@@ -16,13 +17,14 @@ import {
     DrawerItem
   } from "@react-navigation/drawer";
   
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { white, black, grey, black1} from "@/constants/Colors";
-
+import * as UI from "@/components/common/index";
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleTheme } from "@/redux/slices/themeSlice";
 import { RootState } from "@/redux/store";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
   type Props = {
@@ -43,6 +45,17 @@ import { RootState } from "@/redux/store";
     const backgroundColor = useThemeColor({ light: white, dark: black1}, 'background');
 
     // const backgroundColor = useColorScheme()
+
+    const changeTheme = async() => {
+       if (theme === 'light') {
+        dispatch(toggleTheme())
+        await AsyncStorage.setItem('theme', 'dark')
+       }
+       else {
+        dispatch(toggleTheme())
+        await AsyncStorage.setItem('theme', 'light')
+       }
+    }
 
     return (
       <View style={[styles.containner, {backgroundColor: backgroundColor}]}>
@@ -67,25 +80,31 @@ import { RootState } from "@/redux/store";
             // backgroundColor: colors.cardbackground,
           }}
         >
-          <Text style={[styles.preferences, {color: textColor, fontFamily: "SpaceMono"}]}>Preferences</Text>
-          <View style={styles.switchTextContainer}>
-            <Switch
+          {/* <Text style={[styles.preferences, {color: textColor, fontFamily: "SpaceMono"}]}>Preferences</Text> */}
+          <Pressable onPress={changeTheme} style={styles.switchTextContainer}>
+            {/* <Switch
               trackColor={{ false: "#767577", true: "#81b0ff" }}
               thumbColor="#f4f3f4"
               style={{ transform: [{ scaleX: 0.9 }, { scaleY: 0.9 }] }}
-              onChange={()=>{dispatch(toggleTheme())}}
+              onChange={changeTheme}
               value={theme === 'dark' ? true : false}
-            />
+            /> */}
+
+            {theme === 'light' ?
+             (<MaterialIcons name="dark-mode" size={24} color="black" />)
+            :
+            (<MaterialIcons name="light-mode" size={24} color="white" />)}
+
             <Text
               style={{
-                fontSize: 15,
+                fontSize: 12,
                 color: textColor,
                 fontFamily: "SpaceMono"
               }}
             >
-              Dark Theme
+              {theme === 'dark' ? "Light Mode" : "Dark Mode"}
             </Text>
-          </View>
+          </Pressable>
         </View>
         <View style={{ padding: 20, borderTopWidth: 1, borderTopColor: textColor }}>
           <TouchableOpacity onPress={() => {}} style={{ paddingVertical: 15 }}>
@@ -103,21 +122,14 @@ import { RootState } from "@/redux/store";
               </Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity style={{ paddingVertical: 15 }}>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Ionicons name="exit-outline" size={22} color={iconColor} />
-              <Text
-                style={{
-                  fontSize: 15,
-                  color: textColor,
-                  marginLeft: 5,
-                  fontFamily: "SpaceMono"
-                }}
-              >
-                Sign Out
-              </Text>
-            </View>
-          </TouchableOpacity>
+
+          <View style={{ paddingVertical: 15}}>
+            <UI.Button
+              text="Connect wallet"
+              onPress={() => {}}
+
+              />
+          </View>
         </View>
       </View>
     );
@@ -141,6 +153,7 @@ import { RootState } from "@/redux/store";
     switchTextContainer: {
       flexDirection: "row",
       alignItems: "center",
+      gap: 24,
       marginLeft: 7,
       paddingVertical: 5,
     },
