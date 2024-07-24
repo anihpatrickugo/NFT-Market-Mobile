@@ -5,7 +5,7 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { setTheme } from '@/redux/slices/themeSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { FontAwesome6, Fontisto, Ionicons } from '@expo/vector-icons';
+import { FontAwesome6, Ionicons } from '@expo/vector-icons';
 import { black, white } from '@/constants/Colors';
 
 
@@ -79,16 +79,6 @@ export default function DrawerLayout() {
           
         }}
       />
-
-      <Drawer.Screen
-        name="profile"
-        options={{
-          title: 'My Profile',
-          drawerIcon: ()=> (<Fontisto name="person" size={24} color="black" />)
-          
-        }}
-      />
-
    
 
       <Drawer.Screen
