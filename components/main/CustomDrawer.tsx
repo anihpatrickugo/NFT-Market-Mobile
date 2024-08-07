@@ -25,6 +25,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { toggleTheme } from "@/redux/slices/themeSlice";
 import { RootState } from "@/redux/store";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import '@walletconnect/react-native-compat'
+import '@ethersproject/shims'
+import { createWeb3Modal, defaultConfig, Web3Modal, W3mButton } from '@web3modal/ethers5-react-native'
 
 
   type Props = {
@@ -32,6 +35,53 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
     navigation: any,
     descriptors: any,
   };
+
+
+
+// 1. Get projectId from https://cloud.walletconnect.com
+const projectId = 'e7b897cb413fcbeb37e42d7f6d9cb3a6'
+
+// 2. Create config
+const metadata = {
+  name: 'AppKit RN',
+  description: 'AppKit RN Example',
+  url: 'https://walletconnect.com',
+  icons: ['https://avatars.githubusercontent.com/u/37784886'],
+  redirect: {
+    native: 'YOUR_APP_SCHEME:/myapp/'
+  }
+}
+
+const config = defaultConfig({ metadata })
+
+// 3. Define your chains
+const mainnet = {
+  chainId: 1,
+  name: 'Ethereum',
+  currency: 'ETH',
+  explorerUrl: 'https://etherscan.io',
+  rpcUrl: 'https://cloudflare-eth.com'
+}
+
+const polygon = {
+  chainId: 137,
+  name: 'Polygon',
+  currency: 'MATIC',
+  explorerUrl: 'https://polygonscan.com',
+  rpcUrl: 'https://polygon-rpc.com'
+}
+
+const chains = [mainnet, polygon]
+
+// 4. Create modal
+createWeb3Modal({
+  projectId,
+  chains,
+  config,
+  enableAnalytics: true // Optional - defaults to your Cloud configuration
+})
+
+
 
 
   
@@ -59,6 +109,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
     return (
       <View style={[styles.containner, {backgroundColor: backgroundColor}]}>
+        <Web3Modal/>
+        
         <DrawerContentScrollView
           {...props}
           contentContainerStyle={{
@@ -123,13 +175,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
             </View>
           </TouchableOpacity>
 
-          <View style={{ paddingVertical: 15}}>
-            <UI.Button
-              text="Connect wallet"
-              onPress={() => {}}
+          <W3mButton/>
 
-              />
-          </View>
+          
         </View>
       </View>
     );
