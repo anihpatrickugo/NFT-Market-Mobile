@@ -25,6 +25,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { toggleTheme } from "@/redux/slices/themeSlice";
 import { RootState } from "@/redux/store";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import '@walletconnect/react-native-compat'
 import '@ethersproject/shims'
 import { createWeb3Modal, defaultConfig, Web3Modal, W3mButton } from '@web3modal/ethers5-react-native'
@@ -39,14 +40,14 @@ import { createWeb3Modal, defaultConfig, Web3Modal, W3mButton } from '@web3modal
 
 
 // 1. Get projectId from https://cloud.walletconnect.com
-const projectId = 'e7b897cb413fcbeb37e42d7f6d9cb3a6'
+const projectId = process.env.EXPO_PUBLIC_WALLET_CONNECT_PROJECT_ID || ''
 
 // 2. Create config
 const metadata = {
-  name: 'AppKit RN',
-  description: 'AppKit RN Example',
+  name: 'Africana54',
+  description: 'Create, sell, buy and gift your arts. All in one place.',
   url: 'https://walletconnect.com',
-  icons: ['https://avatars.githubusercontent.com/u/37784886'],
+  icons: ['https://github.com/anihpatrickugo/NFT-Market-Mobile/blob/main/assets/images/icon.png'],
   redirect: {
     native: 'YOUR_APP_SCHEME:/myapp/'
   }
@@ -86,6 +87,8 @@ createWeb3Modal({
 
   
   const CustomDrawer: FC<Props> = (props) => {
+
+    
 
     const theme = useSelector((state: RootState) => state.theme.value)
     const dispatch = useDispatch()
@@ -134,18 +137,11 @@ createWeb3Modal({
         >
           {/* <Text style={[styles.preferences, {color: textColor, fontFamily: "SpaceMono"}]}>Preferences</Text> */}
           <Pressable onPress={changeTheme} style={styles.switchTextContainer}>
-            {/* <Switch
-              trackColor={{ false: "#767577", true: "#81b0ff" }}
-              thumbColor="#f4f3f4"
-              style={{ transform: [{ scaleX: 0.9 }, { scaleY: 0.9 }] }}
-              onChange={changeTheme}
-              value={theme === 'dark' ? true : false}
-            /> */}
 
             {theme === 'light' ?
-             (<MaterialIcons name="dark-mode" size={24} color="black" />)
+             (<MaterialIcons name="light-mode" size={24} color="black" />)
             :
-            (<MaterialIcons name="light-mode" size={24} color="white" />)}
+            (<MaterialIcons name="dark-mode" size={24} color="white" />)}
 
             <Text
               style={{

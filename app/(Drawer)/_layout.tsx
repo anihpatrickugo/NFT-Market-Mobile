@@ -10,6 +10,7 @@ import { black, white } from '@/constants/Colors';
 
 
 export default function DrawerLayout() {
+  
   const colorScheme = useColorScheme();
   const theme = useSelector((state: any) => state.theme.value)
   const dispatch = useDispatch()

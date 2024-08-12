@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import themeReducer from '@/redux/slices/themeSlice'
+import contractsReducer from '@/redux/slices/contractsSlice'
 
 export const store = configureStore({
   reducer: {
     theme: themeReducer,
+    contracts: contractsReducer
   },
 })
 

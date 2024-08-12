@@ -1,19 +1,37 @@
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView, View, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as UI from '@/components/common/index';
 import { Ionicons } from '@expo/vector-icons';
 import { black, black3, grey, white0 } from '@/constants/Colors';
 import { useNavigation } from 'expo-router';
+import { showToast } from '@/hooks/toast';
+import { ethers } from 'ethers'
+import { useWeb3ModalAccount, useWeb3ModalProvider } from '@web3modal/ethers5-react-native'
+import nftInfo from '@/contractABI/NFT.json'
+
 
 
 export default function TabTwoScreen() {
+  //nft and marketplace contract
+  const [nft, setNft] = useState<any>(null)
+
+  // loading and error
+  const [loading, setLoading] = useState<boolean>(false)
+  const [error, setError] = useState<string|null>(null)
+  
+
+
     // nft mint details
   const [photo, setPhoto] = useState<string|null>(null);
   const [name, setName] = useState<string|null>(null);
   const [description, setDescription] = useState<string|null>(null);
 
   const navigation = useNavigation()
+
+  // connect to web3modal
+  const { walletProvider } = useWeb3ModalProvider()
+  const { isConnected } = useWeb3ModalAccount()
   
 
   const pickImage = async () => {
@@ -33,8 +51,50 @@ export default function TabTwoScreen() {
   };
 
 
+    // load contract
+    const loadContract = async () => {
+      const nftAddress = process.env.EXPO_PUBLIC_NFT_CONTRACT_ADDRESS || ''
   
+      // providers and signers
+      const provider = new ethers.providers.Web3Provider(walletProvider as any)
+      const signer = provider.getSigner()
+      
+      const nft = new ethers.Contract(nftAddress, nftInfo.abi, signer)
+    
+      // set the nft to state
+      setNft(nft) 
+  
+    }
+  
+    //  mint token
+    const handleMint = async () => {
 
+      if (!isConnected){
+        showToast({message: 'Connect your wallet', type: 'error'})
+        return
+      } 
+
+      // mint a token
+      try{
+        const mintToken = await nft.mint('hello')
+
+      }catch(e: any){
+        showToast({message: e.message, type: 'error'})
+      }
+    }
+  
+    useLayoutEffect(() => {
+      // connectEthereum()
+      loadContract()
+
+    }, [walletProvider])
+
+ 
+  if (loading){
+    return (
+      <UI.Loading/>
+    )
+  }
 
   return (
      <UI.ThemedView lightColor={white0} darkColor={black} style={styles.container}>
@@ -69,7 +129,7 @@ export default function TabTwoScreen() {
           
            <TextInput style={[styles.textInput, {height: 100, }]} placeholderTextColor={black3} multiline placeholder='Description'/>
 
-           <UI.Button text='Confirm Mint'/>
+           <UI.Button text='Confirm Mint' onPress={handleMint}/>
 
        </View>
        </KeyboardAvoidingView>

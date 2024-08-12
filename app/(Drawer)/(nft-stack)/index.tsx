@@ -14,22 +14,25 @@ const HomeScreen: FC<HomeScreenProps> = () => {
   const navigation = useNavigation();
 
   
-
-
   return (
-    <UI.ThemedView lightColor={white0} darkColor={black} style={styles.container}>
-      <UI.ThemedView lightColor='transparent' darkColor='transparent' style={styles.titleContainer}>
+    <UI.LoadingSkeleton />
+  )
+
+
+  // return (
+  //   <UI.ThemedView lightColor={white0} darkColor={black} style={styles.container}>
+  //     <UI.ThemedView lightColor='transparent' darkColor='transparent' style={styles.titleContainer}>
           
-        <UI.DrawerIcon navigation={navigation}/>
-        <UI.ThemedText bold size='lg'>Market Place</UI.ThemedText>
-      </UI.ThemedView>
+  //       <UI.DrawerIcon navigation={navigation}/>
+  //       <UI.ThemedText bold size='lg'>Market Place</UI.ThemedText>
+  //     </UI.ThemedView>
        
-       {/* nft  */}
-       <NFTList />
+  //      {/* nft  */}
+  //      <NFTList />
 
 
-    </UI.ThemedView>
-  );
+  //   </UI.ThemedView>
+  // );
 }
 
 export default HomeScreen
