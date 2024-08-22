@@ -20,7 +20,11 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.anihpatrickugo.NFTMarket"
     },
     "web": {
       "bundler": "metro",
@@ -29,17 +33,24 @@
     },
     "plugins": [
       "expo-router",
-       "expo-font",
-       [
+      "expo-font",
+      [
         "expo-image-picker",
         {
           "photosPermission": "The app will access your photos"
         }
       ]
-      ],
-
+    ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "068b416f-87d5-4fc6-bde4-56b2d80aa0a5"
+      }
     }
   }
 }

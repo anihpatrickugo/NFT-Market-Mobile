@@ -11,11 +11,13 @@ import { RootSiblingParent } from 'react-native-root-siblings';
 
 
 
+
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-
+   
+ 
 
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
@@ -25,6 +27,8 @@ export default function RootLayout() {
 
   
 
+   
+
 
 
   useEffect(() => {
@@ -33,6 +37,8 @@ export default function RootLayout() {
     }
   }, [loaded]);
 
+  
+
   if (!loaded) {
     return null;
   }
@@ -40,6 +46,7 @@ export default function RootLayout() {
   
 
   return (
+ 
     <Provider store={store}>
     <RootSiblingParent>
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>

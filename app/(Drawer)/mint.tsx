@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from 'react';
+import { useContext, useLayoutEffect, useState } from 'react';
 import { StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView, View, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as UI from '@/components/common/index';
@@ -6,17 +6,22 @@ import { Ionicons } from '@expo/vector-icons';
 import { black, black3, grey, white0 } from '@/constants/Colors';
 import { useNavigation } from 'expo-router';
 import { showToast } from '@/hooks/toast';
-import { uploadToCloudinary, pinJSONToIPFS, uploadNFTURI, serializePhoto } from '@/hooks/uploadURI';
+import { router } from 'expo-router';
+import { uploadNFTURI } from '@/hooks/uploadURI';
 
 import { ethers } from 'ethers'
 import { useWeb3ModalProvider, useWeb3ModalAccount } from '@web3modal/ethers5-react-native'
 import nftInfo from '@/contractABI/NFT.json'
 import marketplaceInfo from '@/contractABI/Marketplace.json'
+import { useDispatch } from 'react-redux';
+import { setNFTContract } from '@/redux/slices/contractsSlice';
+
 
 
 export default function TabTwoScreen() {
+
   
-  //nft and marketplace contract
+  // nft and marketplace contract
   const [nft, setNft] = useState<any>(null)
   const [marketPlace, setMarketPlace] = useState<any>(null)
  
@@ -33,10 +38,14 @@ export default function TabTwoScreen() {
 
   const navigation = useNavigation()
 
+  const dispatch = useDispatch()
+
   const { isConnected } = useWeb3ModalAccount()
 
    // connect to web3modal
    const { walletProvider } = useWeb3ModalProvider()
+
+   
   
 
   const pickImage = async () => {
@@ -71,9 +80,9 @@ export default function TabTwoScreen() {
     
     // set the nft  and marketplace to state
     setNft(nft) 
-    setMarketPlace(marketplace)
-
   
+    setMarketPlace(marketplace)
+    console.log(nft.address)
 
   }
 
@@ -129,8 +138,11 @@ export default function TabTwoScreen() {
         //add nft to marketplace
         const listingPrice = ethers.utils.parseEther(amount)
         await (await marketPlace.listItem(nft.address, id, listingPrice)).wait()
+
+        // send a toast and push to home
+        router.push("(nft-stack)/index")
+        showToast({message: 'Minted successfully', type: 'success'})
        
-        console.log('minted')
 
 
 
@@ -145,8 +157,6 @@ export default function TabTwoScreen() {
     // load contract
     useLayoutEffect(() => {
       loadContract()
-      
-  
     }, [walletProvider])
 
  
@@ -155,6 +165,7 @@ export default function TabTwoScreen() {
       <UI.Loading/>
     )
   }
+
 
   return (
      <UI.ThemedView lightColor={white0} darkColor={black} style={styles.container}>

@@ -36,7 +36,7 @@ export const uploadToCloudinary = async (photo: string) => {
 
 
 
-  export  async function pinJSONToIPFS(name: string, description: string, image: string) {
+  export  async function pinJSONToIPFS(image: string, name: string, description: string) {
       
     try {
       const data = JSON.stringify({

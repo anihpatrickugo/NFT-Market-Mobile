@@ -13,11 +13,11 @@ const NFTCard = ({item}: {item: any}) => {
     
     <UI.ThemedView lightColor='white' darkColor={black0} style={styles.containner}>
       <View style={{width: "100%", height: "60%"}}>
-        <Animated.Image sharedTransitionTag={`image-${item.index}`} style={{width: "100%", height: "100%", borderRadius: 20 }} resizeMode='cover' source={require('@/assets/images/nft.jpeg')}/>
+        <Animated.Image sharedTransitionTag={`image-${item.index}`} style={{width: "100%", height: "100%", borderRadius: 20 }} resizeMode='cover' source={{uri: item.image}}/>
       </View>
 
       <View style={{width: "100%", margin: 16}}>
-         <UI.ThemedText size='xl' bold>6088AD</UI.ThemedText>
+         <UI.ThemedText size='xl' bold>{item.name}</UI.ThemedText>
 
          {/* other details */}
          <View style={{width: "90%", flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 8}}>
@@ -25,8 +25,8 @@ const NFTCard = ({item}: {item: any}) => {
             <View style={{flexDirection: "row", gap: 4, alignItems: "center"}}>
                 <Image style={{width: 35, height: 35, borderRadius: 20}} source={require('@/assets/images/profile.png')}/>
                 <View>
-                    <UI.ThemedText size='xs' lightColor={grey} darkColor={grey}>Creator</UI.ThemedText>
-                    <UI.ThemedText size='sm' bold>@Zomax</UI.ThemedText>
+                    <UI.ThemedText size='xs' lightColor={grey} darkColor={grey}>Owner</UI.ThemedText>
+                    <UI.ThemedText size='sm' bold>{item.seller}</UI.ThemedText>
                 </View>
             </View>
 
@@ -34,7 +34,7 @@ const NFTCard = ({item}: {item: any}) => {
                 <Ethereum width={35} height={40}/>
                 <View>
                     <UI.ThemedText size='xs' lightColor={grey} darkColor={grey}>Price:</UI.ThemedText>
-                    <UI.ThemedText size='sm' bold>0.333 ETH</UI.ThemedText>
+                    <UI.ThemedText size='sm' bold>{item.totalPrice} ETH</UI.ThemedText>
                 </View>
             </View>
 
