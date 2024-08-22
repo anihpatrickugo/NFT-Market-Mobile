@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { FlatList, View, StyleSheet, Dimensions } from 'react-native'
 import {grey, black, white, lightGrey, black0, white0, black3,} from '@/constants/Colors'
 import { Skeleton } from  'moti/skeleton'
 import { useThemeColor } from '@/hooks/useThemeColor'
 
 
-const LoadingSkeleton = () => {
+type Props = {
+  type: 'list' | 'details'
+}
+
+const LoadingSkeleton: FC<Props> = ({type}) => {
 
     const backgroundColor = useThemeColor({ light: white0, dark: black }, 'background');
     const colorFrom = useThemeColor({ light: white0, dark: black }, 'text');
@@ -17,6 +21,33 @@ const LoadingSkeleton = () => {
         colorMode: "light",
         colors: [colorFrom, colorTo],
     } 
+
+  if (type === 'details') {
+    return (
+      <Skeleton.Group show>
+        <View style={{paddingVertical: 60, paddingHorizontal:16, gap: 20,  width: "100%", backgroundColor}}>
+          <View style={{alignSelf: "center"}}>
+            <Skeleton height={200} width={400} radius='square' {...skeletonCommonProps} />
+          </View>
+
+          <Skeleton height={30} width={150} radius='round' {...skeletonCommonProps} />
+          <Skeleton height={20} width={200} radius='round' {...skeletonCommonProps} />
+
+          <View style={{gap: 16}}>
+          <Skeleton height={10} width={400} radius='round' {...skeletonCommonProps} />
+          <Skeleton height={10} width={400} radius='round' {...skeletonCommonProps} />
+          <Skeleton height={10} width={400} radius='round' {...skeletonCommonProps} />
+          <Skeleton height={10} width={400} radius='round' {...skeletonCommonProps} />
+          <Skeleton height={10} width={400} radius='round' {...skeletonCommonProps} />
+          <Skeleton height={10} width={400} radius='round' {...skeletonCommonProps} />
+          <Skeleton height={10} width={400} radius='round' {...skeletonCommonProps} />
+          <Skeleton height={10} width={400} radius='round' {...skeletonCommonProps} />
+          </View>
+        </View>
+      </Skeleton.Group>
+    )
+
+  }
     
   return (
     

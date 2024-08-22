@@ -155,9 +155,12 @@ createWeb3Modal({
           </Pressable>
         </View>
         <View style={{ padding: 20, borderTopWidth: 1, borderTopColor: textColor }}>
+          {/* connect button */}
+          <W3mButton />
+
           <TouchableOpacity onPress={() => {}} style={{ paddingVertical: 15 }}>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Ionicons name="share-social-outline" size={22} color={iconColor} />
+            <View style={{ alignItems: "center", gap: 12 }}>
+              
               <Text
                 style={{
                   fontSize: 15,
@@ -166,12 +169,34 @@ createWeb3Modal({
                   fontFamily: "SpaceMono"
                 }}
               >
-                Tell a Friend
+                Powered By Sepolia
+              </Text>
+
+              <Text
+                style={{
+                  fontSize: 10,
+                  color: textColor,
+                  marginLeft: 5,
+                  fontFamily: "SpaceMono"
+                }}
+              >
+                Created By Anih-Patrick Ugochukwu
+              </Text>
+
+              <Text
+                style={{
+                  fontSize: 8,
+                  color: textColor,
+                  marginLeft: 5,
+                  fontFamily: "SpaceMono"
+                }}
+              >
+                Version 1.0
               </Text>
             </View>
           </TouchableOpacity>
 
-          <W3mButton/>
+          
 
           
         </View>

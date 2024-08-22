@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { Drawer } from 'expo-router/drawer';
 import CustomDrawer from '@/components/main/CustomDrawer';
 import { useColorScheme } from '@/hooks/useColorScheme';
@@ -9,11 +9,17 @@ import { FontAwesome6, Ionicons } from '@expo/vector-icons';
 import { black, white } from '@/constants/Colors';
 
 
+
+
 export default function DrawerLayout() {
+
+  
   
   const colorScheme = useColorScheme();
   const theme = useSelector((state: any) => state.theme.value)
   const dispatch = useDispatch()
+
+
 
   // set default theme 
 
